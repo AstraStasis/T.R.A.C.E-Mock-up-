@@ -1,0 +1,724 @@
+[
+  {
+    "id": "7400",
+    "title": "Quad 2-input NAND",
+    "count": 14,
+    "vcc": 14,
+    "gnd": 7,
+    "gates": [
+      {
+        "inputs": [
+          1,
+          2
+        ],
+        "output": 3,
+        "op": "NAND"
+      },
+      {
+        "inputs": [
+          4,
+          5
+        ],
+        "output": 6,
+        "op": "NAND"
+      },
+      {
+        "inputs": [
+          9,
+          10
+        ],
+        "output": 8,
+        "op": "NAND"
+      },
+      {
+        "inputs": [
+          12,
+          13
+        ],
+        "output": 11,
+        "op": "NAND"
+      }
+    ],
+    "pins": [
+      {
+        "number": 1,
+        "name": "1A",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "1B",
+        "direction": "input"
+      },
+      {
+        "number": 3,
+        "name": "1Y",
+        "direction": "output"
+      },
+      {
+        "number": 4,
+        "name": "2A",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "2B",
+        "direction": "input"
+      },
+      {
+        "number": 6,
+        "name": "2Y",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 8,
+        "name": "3Y",
+        "direction": "output"
+      },
+      {
+        "number": 9,
+        "name": "3A",
+        "direction": "input"
+      },
+      {
+        "number": 10,
+        "name": "3B",
+        "direction": "input"
+      },
+      {
+        "number": 11,
+        "name": "4Y",
+        "direction": "output"
+      },
+      {
+        "number": 12,
+        "name": "4A",
+        "direction": "input"
+      },
+      {
+        "number": 13,
+        "name": "4B",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  },
+  {
+    "id": "7408",
+    "title": "Quad 2-input AND",
+    "count": 14,
+    "vcc": 14,
+    "gnd": 7,
+    "gates": [
+      {
+        "inputs": [
+          1,
+          2
+        ],
+        "output": 3,
+        "op": "AND"
+      },
+      {
+        "inputs": [
+          4,
+          5
+        ],
+        "output": 6,
+        "op": "AND"
+      },
+      {
+        "inputs": [
+          9,
+          10
+        ],
+        "output": 8,
+        "op": "AND"
+      },
+      {
+        "inputs": [
+          12,
+          13
+        ],
+        "output": 11,
+        "op": "AND"
+      }
+    ],
+    "pins": [
+      {
+        "number": 1,
+        "name": "1A",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "1B",
+        "direction": "input"
+      },
+      {
+        "number": 3,
+        "name": "1Y",
+        "direction": "output"
+      },
+      {
+        "number": 4,
+        "name": "2A",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "2B",
+        "direction": "input"
+      },
+      {
+        "number": 6,
+        "name": "2Y",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 8,
+        "name": "3Y",
+        "direction": "output"
+      },
+      {
+        "number": 9,
+        "name": "3A",
+        "direction": "input"
+      },
+      {
+        "number": 10,
+        "name": "3B",
+        "direction": "input"
+      },
+      {
+        "number": 11,
+        "name": "4Y",
+        "direction": "output"
+      },
+      {
+        "number": 12,
+        "name": "4A",
+        "direction": "input"
+      },
+      {
+        "number": 13,
+        "name": "4B",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  },
+  {
+    "id": "7432",
+    "title": "Quad 2-input OR",
+    "count": 14,
+    "vcc": 14,
+    "gnd": 7,
+    "gates": [
+      {
+        "inputs": [
+          1,
+          2
+        ],
+        "output": 3,
+        "op": "OR"
+      },
+      {
+        "inputs": [
+          4,
+          5
+        ],
+        "output": 6,
+        "op": "OR"
+      },
+      {
+        "inputs": [
+          9,
+          10
+        ],
+        "output": 8,
+        "op": "OR"
+      },
+      {
+        "inputs": [
+          12,
+          13
+        ],
+        "output": 11,
+        "op": "OR"
+      }
+    ],
+    "pins": [
+      {
+        "number": 1,
+        "name": "1A",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "1B",
+        "direction": "input"
+      },
+      {
+        "number": 3,
+        "name": "1Y",
+        "direction": "output"
+      },
+      {
+        "number": 4,
+        "name": "2A",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "2B",
+        "direction": "input"
+      },
+      {
+        "number": 6,
+        "name": "2Y",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 8,
+        "name": "3Y",
+        "direction": "output"
+      },
+      {
+        "number": 9,
+        "name": "3A",
+        "direction": "input"
+      },
+      {
+        "number": 10,
+        "name": "3B",
+        "direction": "input"
+      },
+      {
+        "number": 11,
+        "name": "4Y",
+        "direction": "output"
+      },
+      {
+        "number": 12,
+        "name": "4A",
+        "direction": "input"
+      },
+      {
+        "number": 13,
+        "name": "4B",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  },
+  {
+    "id": "7404",
+    "title": "Hex inverter",
+    "count": 14,
+    "vcc": 14,
+    "gnd": 7,
+    "gates": [
+      {
+        "inputs": [
+          1
+        ],
+        "output": 2,
+        "op": "NOT"
+      },
+      {
+        "inputs": [
+          3
+        ],
+        "output": 4,
+        "op": "NOT"
+      },
+      {
+        "inputs": [
+          5
+        ],
+        "output": 6,
+        "op": "NOT"
+      },
+      {
+        "inputs": [
+          9
+        ],
+        "output": 8,
+        "op": "NOT"
+      },
+      {
+        "inputs": [
+          11
+        ],
+        "output": 10,
+        "op": "NOT"
+      },
+      {
+        "inputs": [
+          13
+        ],
+        "output": 12,
+        "op": "NOT"
+      }
+    ],
+    "pins": [
+      {
+        "number": 1,
+        "name": "1A",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "1Y",
+        "direction": "output"
+      },
+      {
+        "number": 3,
+        "name": "2A",
+        "direction": "input"
+      },
+      {
+        "number": 4,
+        "name": "2Y",
+        "direction": "output"
+      },
+      {
+        "number": 5,
+        "name": "3A",
+        "direction": "input"
+      },
+      {
+        "number": 6,
+        "name": "3Y",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 8,
+        "name": "4Y",
+        "direction": "output"
+      },
+      {
+        "number": 9,
+        "name": "4A",
+        "direction": "input"
+      },
+      {
+        "number": 10,
+        "name": "5Y",
+        "direction": "output"
+      },
+      {
+        "number": 11,
+        "name": "5A",
+        "direction": "input"
+      },
+      {
+        "number": 12,
+        "name": "6Y",
+        "direction": "output"
+      },
+      {
+        "number": 13,
+        "name": "6A",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  },
+  {
+    "id": "74138",
+    "title": "3-to-8 decoder",
+    "count": 16,
+    "vcc": 16,
+    "gnd": 8,
+    "sequential": false,
+    "pins": [
+      {
+        "number": 1,
+        "name": "A",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "B",
+        "direction": "input"
+      },
+      {
+        "number": 3,
+        "name": "C",
+        "direction": "input"
+      },
+      {
+        "number": 4,
+        "name": "/G2A",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "/G2B",
+        "direction": "input"
+      },
+      {
+        "number": 6,
+        "name": "G1",
+        "direction": "input"
+      },
+      {
+        "number": 7,
+        "name": "/Y7",
+        "direction": "output"
+      },
+      {
+        "number": 8,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 9,
+        "name": "/Y6",
+        "direction": "output"
+      },
+      {
+        "number": 10,
+        "name": "/Y5",
+        "direction": "output"
+      },
+      {
+        "number": 11,
+        "name": "/Y4",
+        "direction": "output"
+      },
+      {
+        "number": 12,
+        "name": "/Y3",
+        "direction": "output"
+      },
+      {
+        "number": 13,
+        "name": "/Y2",
+        "direction": "output"
+      },
+      {
+        "number": 14,
+        "name": "/Y1",
+        "direction": "output"
+      },
+      {
+        "number": 15,
+        "name": "/Y0",
+        "direction": "output"
+      },
+      {
+        "number": 16,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  },
+  {
+    "id": "7483",
+    "title": "4-bit binary full adder",
+    "count": 16,
+    "vcc": 5,
+    "gnd": 12,
+    "sequential": false,
+    "pins": [
+      {
+        "number": 1,
+        "name": "A4",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "S3",
+        "direction": "output"
+      },
+      {
+        "number": 3,
+        "name": "A3",
+        "direction": "input"
+      },
+      {
+        "number": 4,
+        "name": "B3",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "VCC",
+        "direction": "power"
+      },
+      {
+        "number": 6,
+        "name": "S2",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "B2",
+        "direction": "input"
+      },
+      {
+        "number": 8,
+        "name": "A2",
+        "direction": "input"
+      },
+      {
+        "number": 9,
+        "name": "S1",
+        "direction": "output"
+      },
+      {
+        "number": 10,
+        "name": "A1",
+        "direction": "input"
+      },
+      {
+        "number": 11,
+        "name": "B1",
+        "direction": "input"
+      },
+      {
+        "number": 12,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 13,
+        "name": "C0",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "C4",
+        "direction": "output"
+      },
+      {
+        "number": 15,
+        "name": "S4",
+        "direction": "output"
+      },
+      {
+        "number": 16,
+        "name": "B4",
+        "direction": "input"
+      }
+    ]
+  },
+  {
+    "id": "7474",
+    "title": "Dual D flip-flop",
+    "count": 14,
+    "vcc": 14,
+    "gnd": 7,
+    "sequential": true,
+    "pins": [
+      {
+        "number": 1,
+        "name": "/CLR1",
+        "direction": "input"
+      },
+      {
+        "number": 2,
+        "name": "D1",
+        "direction": "input"
+      },
+      {
+        "number": 3,
+        "name": "CLK1",
+        "direction": "input"
+      },
+      {
+        "number": 4,
+        "name": "/PRE1",
+        "direction": "input"
+      },
+      {
+        "number": 5,
+        "name": "Q1",
+        "direction": "output"
+      },
+      {
+        "number": 6,
+        "name": "/Q1",
+        "direction": "output"
+      },
+      {
+        "number": 7,
+        "name": "GND",
+        "direction": "power"
+      },
+      {
+        "number": 8,
+        "name": "/Q2",
+        "direction": "output"
+      },
+      {
+        "number": 9,
+        "name": "Q2",
+        "direction": "output"
+      },
+      {
+        "number": 10,
+        "name": "/PRE2",
+        "direction": "input"
+      },
+      {
+        "number": 11,
+        "name": "CLK2",
+        "direction": "input"
+      },
+      {
+        "number": 12,
+        "name": "D2",
+        "direction": "input"
+      },
+      {
+        "number": 13,
+        "name": "/CLR2",
+        "direction": "input"
+      },
+      {
+        "number": 14,
+        "name": "VCC",
+        "direction": "power"
+      }
+    ]
+  }
+]

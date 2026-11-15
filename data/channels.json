@@ -1,0 +1,353 @@
+[
+  {
+    "id": "EXP1_A",
+    "label": "EXP 1 / A",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP1_B",
+    "label": "EXP 1 / B",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP1_Y",
+    "label": "EXP 1 / Y",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_A",
+    "label": "EXP 4 / A",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_B",
+    "label": "EXP 4 / B",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_Y0",
+    "label": "EXP 4 / Y0",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_Y1",
+    "label": "EXP 4 / Y1",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_Y2",
+    "label": "EXP 4 / Y2",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "EXP4_Y3",
+    "label": "EXP 4 / Y3",
+    "kind": "experiment",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB01A",
+    "label": "Column 1 / A",
+    "kind": "breadboard",
+    "column": 1,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB02A",
+    "label": "Column 2 / A",
+    "kind": "breadboard",
+    "column": 2,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB03A",
+    "label": "Column 3 / A",
+    "kind": "breadboard",
+    "column": 3,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB04A",
+    "label": "Column 4 / A",
+    "kind": "breadboard",
+    "column": 4,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB05A",
+    "label": "Column 5 / A",
+    "kind": "breadboard",
+    "column": 5,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB06A",
+    "label": "Column 6 / A",
+    "kind": "breadboard",
+    "column": 6,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB07A",
+    "label": "Column 7 / A",
+    "kind": "breadboard",
+    "column": 7,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB08A",
+    "label": "Column 8 / A",
+    "kind": "breadboard",
+    "column": 8,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB09A",
+    "label": "Column 9 / A",
+    "kind": "breadboard",
+    "column": 9,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB10A",
+    "label": "Column 10 / A",
+    "kind": "breadboard",
+    "column": 10,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB11A",
+    "label": "Column 11 / A",
+    "kind": "breadboard",
+    "column": 11,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB12A",
+    "label": "Column 12 / A",
+    "kind": "breadboard",
+    "column": 12,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB13A",
+    "label": "Column 13 / A",
+    "kind": "breadboard",
+    "column": 13,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB14A",
+    "label": "Column 14 / A",
+    "kind": "breadboard",
+    "column": 14,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB15A",
+    "label": "Column 15 / A",
+    "kind": "breadboard",
+    "column": 15,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB16A",
+    "label": "Column 16 / A",
+    "kind": "breadboard",
+    "column": 16,
+    "half": "A",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB01B",
+    "label": "Column 1 / B",
+    "kind": "breadboard",
+    "column": 1,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB02B",
+    "label": "Column 2 / B",
+    "kind": "breadboard",
+    "column": 2,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB03B",
+    "label": "Column 3 / B",
+    "kind": "breadboard",
+    "column": 3,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB04B",
+    "label": "Column 4 / B",
+    "kind": "breadboard",
+    "column": 4,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB05B",
+    "label": "Column 5 / B",
+    "kind": "breadboard",
+    "column": 5,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB06B",
+    "label": "Column 6 / B",
+    "kind": "breadboard",
+    "column": 6,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB07B",
+    "label": "Column 7 / B",
+    "kind": "breadboard",
+    "column": 7,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB08B",
+    "label": "Column 8 / B",
+    "kind": "breadboard",
+    "column": 8,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB09B",
+    "label": "Column 9 / B",
+    "kind": "breadboard",
+    "column": 9,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB10B",
+    "label": "Column 10 / B",
+    "kind": "breadboard",
+    "column": 10,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB11B",
+    "label": "Column 11 / B",
+    "kind": "breadboard",
+    "column": 11,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB12B",
+    "label": "Column 12 / B",
+    "kind": "breadboard",
+    "column": 12,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB13B",
+    "label": "Column 13 / B",
+    "kind": "breadboard",
+    "column": 13,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB14B",
+    "label": "Column 14 / B",
+    "kind": "breadboard",
+    "column": 14,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB15B",
+    "label": "Column 15 / B",
+    "kind": "breadboard",
+    "column": 15,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  },
+  {
+    "id": "BB16B",
+    "label": "Column 16 / B",
+    "kind": "breadboard",
+    "column": 16,
+    "half": "B",
+    "mux": null,
+    "capture_input": null
+  }
+]

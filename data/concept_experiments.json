@@ -1,0 +1,20 @@
+{
+  "_note": "Experiment reference data. Only facts from Project Sketches Rev S3 are entered. Fill null fields from the approved RTU laboratory manual; see docs/EXPERIMENT_DATA.md for the format.",
+  "experiments": [
+    {"id": 1, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 2, "title": null, "inputs": ["I7", "I6", "I5", "I4", "I3", "I2", "I1", "I0"], "outputs": null, "truth_table": null, "source": "Project Sketches Rev S3, page 1"},
+    {"id": 3, "title": null, "inputs": ["I7", "I6", "I5", "I4", "I3", "I2", "I1", "I0"], "outputs": null, "truth_table": null, "source": "Project Sketches Rev S3, page 1"},
+    {"id": 4, "title": "NOR and NAND gates", "inputs": ["A / SWA", "B / SWB", "C / SWC"], "outputs": null, "truth_table": null, "source": "Project Sketches Rev S3, pages 1 and 4"},
+    {"id": 5, "title": null, "inputs": ["A / SWA", "B / SWB", "C / SWC"], "outputs": null, "truth_table": null, "source": "Project Sketches Rev S3, page 1"},
+    {"id": 6, "title": null, "inputs": ["I7", "I6", "I5", "I4", "I3", "I2", "I1", "I0"], "outputs": null, "truth_table": null, "source": "Project Sketches Rev S3, page 1"},
+    {"id": 7, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 8, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 9, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 10, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 11, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 12, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 13, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 14, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null},
+    {"id": 15, "title": null, "inputs": null, "outputs": null, "truth_table": null, "source": null}
+  ]
+}
