@@ -55,6 +55,7 @@ function render() {
   }
 }
 
+const expandedPanels = new Set();
 function foldPanel(panel, title) {
   const details = document.createElement('details');
   details.className = 'optional-panel';
@@ -62,6 +63,10 @@ function foldPanel(panel, title) {
   summary.textContent = title;
   panel.before(details);
   details.append(summary, panel);
+  details.open = expandedPanels.has(title);
+  details.addEventListener('toggle', () => {
+    if (details.isConnected) details.open ? expandedPanels.add(title) : expandedPanels.delete(title);
+  });
 }
 
 /* ---------------- Experiments ---------------- */
@@ -125,8 +130,18 @@ function updateMeasurements() {
   if (!$('#measurements')) return;
   $('#measurement-source').textContent = examples ? 'OFFLINE EXAMPLES · Demonstration values only. No trainer connected.' : state.session_id ? 'SESSION SIMULATION · Generated samples, not live hardware measurements.' : 'HARDWARE DISCONNECTED · All live readings are unavailable. Enable offline examples to inspect the presentation.';
   const rows = state.measurements;
+  const measurements = $('#measurements');
+  const selection = [...selectedNodes].join(',');
+  const readings = JSON.stringify(rows);
+  if (measurements.dataset.readings === readings && measurements.dataset.selection === selection) return;
+  measurements.dataset.readings = readings;
+  measurements.dataset.selection = selection;
   $('#measurements').innerHTML = rows.map(r => `<tr><td><input type="checkbox" data-node="${r.id}" aria-label="Show ${r.id}" ${selectedNodes.has(r.id) ? 'checked' : ''}></td><td>${r.id}</td><td>${r.column} / ${r.half}</td><td>${r.mv == null ? '—' : (r.mv / 1000).toFixed(2) + ' V'}</td><td class="${r.state}">${r.state}</td><td>${r.age_ms == null ? 'No sample' : r.age_ms > 3000 ? 'Stale · ' + r.age_ms + ' ms' : r.age_ms + ' ms ago'}</td><td>${r.sequence ?? '—'}</td></tr>`).join('');
-  $('#nodes').innerHTML = ['A-E', 'F-J'].map((half, side) => `${side ? '<div class="gap"></div>' : ''}${Array.from({length: 63}, (_, i) => {
+  const board = $('#nodes');
+  const highlights = JSON.stringify(rows.filter(r => selectedNodes.has(r.id)).map(r => [r.id, r.column, r.half, r.state]));
+  if (board.dataset.highlights === highlights) return;
+  board.dataset.highlights = highlights;
+  board.innerHTML = ['A-E', 'F-J'].map((half, side) => `${side ? '<div class="gap"></div>' : ''}${Array.from({length: 63}, (_, i) => {
     const r = rows.find(n => n.column === i + 1 && n.half === half && selectedNodes.has(n.id));
     return `<div class="node ${r ? 'monitored ' + r.state : ''}" title="${i + 1} / ${half}${r ? ' · ' + r.id + ' ' + r.state : ' · not mapped'}">${(i % 5 === 0 || r) ? `<span class="num">${i + 1}</span>` : ''}•<br>•<br>•<br>•<br>•</div>`;
   }).join('')}`).join('');
@@ -281,8 +296,9 @@ document.addEventListener('change', e => {
 window.addEventListener('hashchange', () => { if (page !== location.hash.slice(1)) navigate(location.hash.slice(1)); });
 
 try {
-  await refresh();
-  try { experiments = (await api('experiments')).experiments; } catch (e) { experimentError = e.message; }
+  await Promise.all([refresh(), api('experiments').then(data => {
+    experiments = data.experiments;
+  }).catch(error => { experimentError = error.message; })]);
   if (state.configuration) { model = state.configuration.model; map = {...state.configuration.assignments}; checkKey = state.configuration.id; checks.wiring = state.outputs_enabled; }
   navigate(location.hash.slice(1) || 'experiments');
   setInterval(async () => {

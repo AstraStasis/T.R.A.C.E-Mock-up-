@@ -1,30 +1,28 @@
 """Local TRACE desktop window with an application-owned server."""
 import socket
 import threading
-import time
-import urllib.request
+import sys
 
-import uvicorn
-import webview
+try:
+    import uvicorn
+    import webview
+    from backend.app import app
+except ImportError:
+    if __name__ == '__main__':
+        sys.exit(72)
+    raise
 
 
 def main():
     listener = socket.socket()
     listener.bind(('127.0.0.1', 0))
+    listener.listen()
     port = listener.getsockname()[1]
-    server = uvicorn.Server(uvicorn.Config('backend.app:app', log_level='warning'))
+    server = uvicorn.Server(uvicorn.Config(app, log_level='warning'))
     worker = threading.Thread(target=server.run, kwargs={'sockets': [listener]}, daemon=True)
     worker.start()
     url = f'http://127.0.0.1:{port}'
     try:
-        for attempt in range(100):
-            try:
-                urllib.request.urlopen(url + '/api/concept/state', timeout=1).close()
-                break
-            except OSError:
-                time.sleep(0.1)
-        else:
-            raise RuntimeError('TRACE server could not start.')
         webview.create_window('TRACE', url, width=1440, height=900, min_size=(1000, 700))
         webview.start(gui='edgechromium')
     finally:

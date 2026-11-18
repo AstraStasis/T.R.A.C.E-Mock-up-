@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import subprocess
 import sys
@@ -6,20 +5,11 @@ import ctypes
 
 # Start the dedicated desktop application using the workspace environment.
 root=Path(__file__).resolve().parent
-url='http://127.0.0.1:8000'
 python=root/'.venv/Scripts/pythonw.exe'
 python_console=root/'.venv/Scripts/python.exe'
 
 
 def ensure_environment():
-    if python.exists() and python_console.exists():
-        probe = subprocess.run(
-            [str(python_console), '-c', 'import fastapi, uvicorn, webview'],
-            cwd=root,
-            creationflags=subprocess.CREATE_NO_WINDOW,
-        )
-        if probe.returncode == 0:
-            return True
     answer = ctypes.windll.user32.MessageBoxW(
         0,
         'TRACE needs to install its local Python environment and dependencies. Continue?',
@@ -45,8 +35,18 @@ def ensure_environment():
     return True
 
 
-if not ensure_environment():
-    sys.exit(1)
+def launch():
+    return subprocess.run([str(python), str(root / 'desktop.py')], cwd=root,
+                          creationflags=subprocess.CREATE_NO_WINDOW).returncode
 
-desktop_python = root / '.venv/Scripts/pythonw.exe'
-subprocess.Popen([str(desktop_python), str(root / 'desktop.py')], cwd=root, creationflags=subprocess.CREATE_NO_WINDOW)
+
+if python.exists() and python_console.exists():
+    result = launch()
+    if result != 72:  # Desktop reserves 72 for missing dependencies.
+        sys.exit(result)
+if ensure_environment():
+    result = launch()
+    if result == 72:
+        ctypes.windll.user32.MessageBoxW(0, 'Dependency installation is incomplete. Run setup.ps1.', 'TRACE setup', 0x10)
+    sys.exit(result)
+sys.exit(1)

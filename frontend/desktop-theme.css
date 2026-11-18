@@ -1,0 +1,43 @@
+/* Desktop sketch revision. Remove the stylesheet link to restore the original theme. */
+:root {
+  --ink: #173b40;
+  --accent: #116b5c;
+  --line: #ccd8d3;
+  --soft: #e4f1ea;
+  background: #f5f7f4;
+  color: var(--ink);
+}
+header { border-top: 3px solid var(--accent); }
+.brand { letter-spacing: -.9px; }
+.status b { border: 0; background: var(--soft); border-radius: 3px; }
+nav button.active { box-shadow: inset 3px 0 var(--accent); }
+.heading h1 { font-weight: 650; letter-spacing: -.8px; }
+.panel, .optional-panel { border-radius: 6px; }
+.optional-panel { border-bottom: 1px solid var(--line); }
+.optional-panel summary { font-weight: 600; }
+th { background: #eaf0eb; color: #36524e; }
+td { font-variant-numeric: tabular-nums; }
+.sketch-layout {
+  align-items: center;
+  justify-content: space-around;
+  padding: clamp(16px, 3vw, 40px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.sketch-layout .board {
+  background-color: #f8faf7;
+  background-image: radial-gradient(#d1dbd5 .8px, transparent .8px);
+  background-size: 11px 11px;
+  width: min(54%, 450px, 56vh);
+}
+.sketch-layout .exp { font: 600 13px Consolas, monospace; background: #fff; }
+.sketch-layout .exp:hover { background: var(--soft); }
+.sketch-layout .exp.selected { background: var(--accent); border-color: var(--accent); color: white; }
+.sketch-layout aside { padding-top: 0; }
+.switch-label { border-left: 3px solid #7a9f8f; background: #f6f9f6; font-weight: 600; }
+@media (max-width: 600px) {
+  .sketch-layout { flex-direction: column; align-items: stretch; gap: 20px; }
+  .sketch-layout .board, .sketch-layout aside { width: 100%; }
+  nav button.active { box-shadow: inset 0 2px var(--accent); }
+}
