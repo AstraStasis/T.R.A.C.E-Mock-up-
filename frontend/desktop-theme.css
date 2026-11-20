@@ -1,43 +1,74 @@
-/* Desktop sketch revision. Remove the stylesheet link to restore the original theme. */
+@font-face {
+  font-family: Iceland;
+  src: url('./Iceland-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('./IBM-Plex-Sans.ttf') format('truetype');
+  font-weight: 100 700;
+  font-display: swap;
+}
 :root {
-  --ink: #173b40;
-  --accent: #116b5c;
-  --line: #ccd8d3;
-  --soft: #e4f1ea;
-  background: #f5f7f4;
+  color-scheme: light;
+  --surface: white;
+  --workspace: #f4f6fa;
+  --ink: #263247;
+  --muted: #58667a;
+  --line: #cacde2;
+  --accent: #2a66c0;
+  --soft: #d8e9d3;
+  --alert: #a3472e;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--workspace);
   color: var(--ink);
 }
-header { border-top: 3px solid var(--accent); }
-.brand { letter-spacing: -.9px; }
-.status b { border: 0; background: var(--soft); border-radius: 3px; }
-nav button.active { box-shadow: inset 3px 0 var(--accent); }
-.heading h1 { font-weight: 650; letter-spacing: -.8px; }
-.panel, .optional-panel { border-radius: 6px; }
-.optional-panel { border-bottom: 1px solid var(--line); }
-.optional-panel summary { font-weight: 600; }
-th { background: #eaf0eb; color: #36524e; }
-td { font-variant-numeric: tabular-nums; }
-.sketch-layout {
-  align-items: center;
-  justify-content: space-around;
-  padding: clamp(16px, 3vw, 40px);
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface: #1e2635;
+    --workspace: #151c28;
+    --ink: #e9ecf3;
+    --muted: #cacde2;
+    --line: #434b60;
+    --accent: #73a6f2;
+    --soft: #273d35;
+    --alert: #e48667;
 }
+.header-actions { display: flex; align-items: center; gap: clamp(8px, 2vw, 24px); }
+#theme-toggle { display: grid; place-items: center; width: 36px; min-height: 36px; padding: 0; font: 22px/1 "Segoe UI Symbol", sans-serif; }
+#theme-toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+header, nav, .panel, button, select, input, .step { background: var(--surface); }
+.brand { font: 400 40px/1 Iceland, sans-serif; letter-spacing: 0; color: var(--accent); }
+.status { font-size: 16px; color: var(--alert); }
+.status i, .status b { display: none; }
+nav button span { font-size: 16px; }
+button:hover, .tabs .active, nav button.active, th { background: var(--soft); }
+button.primary { background: #2a66c0; color: white; }
+.heading h1 { font-size: 32px; font-weight: 600; }
+h2 { font-size: 20px; font-weight: 600; }
+.panel, main[data-page="monitor"] > .panel, main[data-page="virtual"] > .split > .panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px;
+}
+.sketch-layout { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(240px, 1fr); gap: 24px; }
+.sketch-layout aside { width: auto; padding: 24px; }
 .sketch-layout .board {
-  background-color: #f8faf7;
-  background-image: radial-gradient(#d1dbd5 .8px, transparent .8px);
-  background-size: 11px 11px;
-  width: min(54%, 450px, 56vh);
+  width: 100%; max-width: 608px; margin: 28px auto 12px;
+  aspect-ratio: 608 / 505; background: var(--workspace); border-color: var(--line);
 }
-.sketch-layout .exp { font: 600 13px Consolas, monospace; background: #fff; }
-.sketch-layout .exp:hover { background: var(--soft); }
-.sketch-layout .exp.selected { background: var(--accent); border-color: var(--accent); color: white; }
-.sketch-layout aside { padding-top: 0; }
-.switch-label { border-left: 3px solid #7a9f8f; background: #f6f9f6; font-weight: 600; }
+.sketch-layout .exp { border-radius: 4px; font: 600 15px 'IBM Plex Sans', sans-serif; }
+.sketch-layout .exp.selected { background: var(--soft); color: var(--accent); }
+.switch-label { background: var(--workspace); }
+main[data-page="monitor"] .nodeboard { background: var(--surface); }
+th, td, .row { border-color: var(--line); }
+.UNAVAILABLE { color: var(--muted); }
+@media (min-width: 1101px) {
+  nav { width: 220px; }
+  main { margin-left: 220px; padding: 34px 40px; }
+}
+@media (max-width: 720px) {
+  .sketch-layout { grid-template-columns: 1fr; }
+  .status { font-size: 13px; }
+}
 @media (max-width: 600px) {
-  .sketch-layout { flex-direction: column; align-items: stretch; gap: 20px; }
-  .sketch-layout .board, .sketch-layout aside { width: 100%; }
-  nav button.active { box-shadow: inset 0 2px var(--accent); }
+  nav button span { font-size: 11px; }
 }

@@ -24,7 +24,7 @@ def main():
     url = f'http://127.0.0.1:{port}'
     try:
         webview.create_window('TRACE', url, width=1440, height=900, min_size=(1000, 700))
-        webview.start(gui='edgechromium')
+        webview.start(gui='edgechromium', private_mode=False)
     finally:
         server.should_exit = True
         worker.join(timeout=5)

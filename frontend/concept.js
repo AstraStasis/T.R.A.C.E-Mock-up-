@@ -80,9 +80,9 @@ function truthTable(t) {
 }
 function experimentView() {
   const experiment = expData(selectedExperiment);
-  main.innerHTML = heading() + `<p>Activity / Experiment ${selectedExperiment}${experiment.title ? ' - ' + esc(experiment.title) : ''}</p>
-    <div class="sketch-layout"><div class="board" aria-label="Physical experiment locator">${Object.entries(positions).map(([number, position]) => `<button data-exp="${number}" class="exp ${Number(number) === selectedExperiment ? 'selected' : ''}" style="left:${position[0]}%;top:${position[1]}%;width:${position[2]}%;height:${position[3]}%">E${number}</button>`).join('')}</div>
-    <aside><h2>Physical input column</h2><div class="switch-list">${(experiment.inputs || []).map(label => `<div class="switch-label">${esc(label)}</div>`).join('') || '<p>Labels awaiting laboratory manual.</p>'}</div><p class="muted">Outputs on trainer. Use the laboratory manual for the activity.</p>${experiment.truth_table ? truthTable(experiment.truth_table) : ''}${experimentError ? `<p>${esc(experimentError)}</p>` : ''}</aside></div>`;
+  main.innerHTML = heading() + `<p>Experiment ${selectedExperiment}${experiment.title ? ' - ' + esc(experiment.title) : ''}</p>
+    <div class="sketch-layout"><section class="panel locator"><h2>Experiment board</h2><div class="board" aria-label="Physical experiment locator">${Object.entries(positions).map(([number, position]) => `<button data-exp="${number}" class="exp ${Number(number) === selectedExperiment ? 'selected' : ''}" style="left:${position[0]}%;top:${position[1]}%;width:${position[2]}%;height:${position[3]}%">E${number}</button>`).join('')}</div>
+    </section><aside class="panel"><h2>Physical inputs</h2><div class="switch-list">${(experiment.inputs || []).map(label => `<div class="switch-label">${esc(label)}</div>`).join('') || '<p>Labels awaiting laboratory manual.</p>'}</div>${experiment.truth_table ? truthTable(experiment.truth_table) : ''}${experimentError ? `<p>${esc(experimentError)}</p>` : ''}</aside></div>`;
 }
 
 function expandedExperimentReference() {
