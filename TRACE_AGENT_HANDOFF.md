@@ -1,345 +1,282 @@
-# TRACE workspace handoff for the next AI agent
+# TRACE Workspace Guide
 
-> **Superseding update - 12 November 2026:** Read
-> [docs/CONCEPT_UPDATE_2026-11-12.md](docs/CONCEPT_UPDATE_2026-11-12.md) first.
-> Three new user-provided PDFs change the current direction to a desktop/USB
-> application, a physical experiment locator, node-group monitoring and logical
-> Virtual IC port assignments. The new four-view mock-up is served at `/`, with
-> hardware disconnected and offline examples explicitly separated. The previous
-> Pi/hotspot, decoder EXP4, package-pin dock and analyzer prototype remains at
-> `/legacy`; those assumptions below are historical, not the latest specification.
-> New files: `backend/concept.py`, `frontend/concept.*`, `tests/test_concept.py`,
-> `tools/concept_browser_check.py`. Latest checks: 73 Python tests and 12 current
-> page/viewport combinations passed. Physical USB integration remains pending.
->
-> Continuation enhancements and remaining work are recorded in
-> [docs/MOCKUP_ENHANCEMENTS_2026-11-12.md](docs/MOCKUP_ENHANCEMENTS_2026-11-12.md).
+Updated 20 November 2026.
 
-Updated: 5 November 2026 (Asia/Manila).
+## Project overview
 
-Workspace: `C:\Users\AndreiG\Python Mini Projects\T.R.A.C.E`
+TRACE means **Teaching and Real-Time Analysis of Circuits and Experiments**. This
+repository contains an offline desktop mockup for a proposed digital-logic
+laboratory trainer.
 
-## 1. Read this first: what this project actually is today
+The current application demonstrates the intended software workflow while the
+physical trainer is still under development. It combines a local Python service,
+an HTML/CSS/JavaScript interface, and a PyWebView desktop window. The application
+does not require an internet connection after its dependencies have been
+installed.
 
-**This is a working software prototype connected to simulated hardware. It is not yet an operational physical TRACE training board.**
+The mockup uses generated readings and simulated acknowledgements. It has not
+been connected to, or validated with, the physical TRACE trainer. It must not be
+presented as evidence of actual voltage accuracy, timing, output loading, USB
+communication, firmware behavior, or hardware safety performance.
 
-The browser interface, Python backend, comparison logic, digital waveform viewer, simulator controls, and simulated IC behavior are implemented. The voltages, digital captures, faults, and dock readings currently come from Python-generated data. There is a reconnecting serial adapter and a firmware protocol, but **no real MCU firmware has been implemented in this repository and no physical board has been validated**.
+## Current source of requirements
 
-The user explicitly asked whether this was still a simulation. We confirmed that it is more than a visual mockup, but does not prove that the physical system works. Preserve that distinction in all future explanations and thesis evidence.
+The current four-view design follows these project documents:
 
-The user's current request was to create this handoff, not to change application behavior or configure hardware. This document records future work; it is not blanket authorization to operate hardware, change network settings, or claim measurements.
+- `Project Sketches.pdf`
+- `TRACE-Concept-of-Operation.pdf`
+- `TRACE-System-Architecture.pdf`
+- The thesis manuscript and value proposition
 
-## 2. Thesis context and working requirements
+The reference PDFs are project inputs and are not stored in this repository.
+Their original computer locations are intentionally omitted from this guide.
 
-TRACE means **Teaching and Real-Time Analysis of Circuits and Experiments**. It is an RTU BS Computer Engineering capstone for the Logic Circuits and Design Laboratory.
+The Concept of Operation is the main behavioral reference. It defines a desktop
+application connected to the trainer through USB, physical operation of the
+predefined experiment controls, bounded breadboard monitoring, logical Virtual IC
+port assignments, acknowledged state changes, explicit output disable, and clear
+separation between offline examples and live hardware data.
 
-The proposed board combines predefined experiment circuits, a central instrumented breadboard, voltage/logic-state monitoring, selected digital-signal capture, and a Virtual IC dock. The handoff describes approximately 15 experiment blocks and a 16-pin dock; final quantities and routing have not been supplied.
+## Current application
 
-The intended experience is:
+The default interface contains four views.
 
-- Software runs on an onboard Raspberry Pi with a 5-inch, 800 x 480 touchscreen.
-- Students use the board without needing their own laptop.
-- The same local web interface can be opened from phones/tablets over the board's Wi-Fi hotspot.
-- Runtime is offline: no accounts, analytics, CDN assets, or required external requests.
-- Optional PC connection is useful for development and validation, but not required for normal student use.
+### Experiments
 
-### Source documents supplied by the user
+- Displays a physical locator for experiment regions E1 through E15.
+- Selecting an experiment shows its known physical input labels.
+- Experiment 4 is identified as NOR and NAND gates with `A / SWA`, `B / SWB`,
+  and `C / SWC`.
+- Physical input labels are read-only references. Students operate the switches
+  on the trainer itself.
+- The interface does not claim remote switching or remote experiment power
+  control.
+- Activity metadata comes from `data/concept_experiments.json`. Entries without
+  verified laboratory-manual data remain incomplete instead of being invented.
 
-These files are external to this repository. They may need to be supplied again on a different machine:
+### Breadboard monitor
 
-| Document | Original location |
-| --- | --- |
-| Original software handoff | `D:\geana\Downloads\TRACE_Software_Handoff_Prompt.md` |
-| UI reference (five screens) | `D:\geana\Downloads\TRACE Software – UI Concept.pdf` |
-| Thesis manuscript | `C:\Users\AndreiG\Documents\4th Year 1st Sem Documents Assignments\CpE Practice and Design 1\Capstone_Manuscript latest.pdf` |
-| Value proposition | `C:\Users\AndreiG\Documents\4th Year 1st Sem Documents Assignments\CpE Practice and Design 1\Value Proposition.pdf` |
+- Shows the central 63-column breadboard representation.
+- Treats A-E and F-J contact groups as electrically connected node groups rather
+  than independent measurements at every socket.
+- Demonstrates supported groups N01, N02, N03, N04, and N07.
+- Displays voltage, interpreted logic state, sample validity, freshness, and
+  sequence information in the underlying mockup data.
+- Uses `LOW`, `HIGH`, `UNDEFINED`, and `UNAVAILABLE` consistently with the
+  Concept of Operation.
+- Offline values are clearly marked as demonstrations while hardware remains
+  disconnected.
 
-The UI concept was visually inspected and used as a reference, not a pixel-for-pixel specification. The original handoff requested review stops after each phase; the user subsequently said: **"just do everything even the front-end, we'll just reivew it later"**. That authorized the initial simulator-backed application work without phase-by-phase stops.
+### Virtual IC
 
-### Scope constraints to preserve
+- Presents logical signals assigned to breadboard node groups.
+- Treats the port map as an interface assignment rather than a copy of a physical
+  IC package pinout.
+- Displays a proposed two-section 7476 mapping. Activation is blocked because the
+  exact variant, clock edge, initialization, and asynchronous behavior have not
+  been finalized.
+- Provides a simulated 74LS00 rehearsal with configure, activate, input-state,
+  deactivate, and output-disable behavior.
+- Checks complete assignments, exclusive node ownership, accepted configuration
+  identity, and operating state before simulated activation.
+- Keeps the separate NAND and generic JK behavior examples offline and distinct
+  from trainer operation.
 
-1. Report **what differs**: expected value, measured value, channel, and timing where available. Do not add step-by-step troubleshooting, recommended repairs, or student troubleshooting logs.
-2. Digital capture only. The voltage monitor is not an analog oscilloscope.
-3. Only mapped/selected contacts are monitored. Do not imply coverage of every breadboard hole.
-4. Label Virtual IC behavior **"Emulated, logic-level"**. Do not claim equivalence to physical propagation, drive current, loading, or electrical characteristics.
-5. No personal data, student accounts, or runtime external network dependencies.
-6. Display actual device capabilities once measured. Simulator settings are not hardware results.
+### Connection
 
-### Document conflicts still requiring researcher clarification
+- Shows the planned physical trainer identity, protocol, supported-node, model,
+  and operating-limit fields.
+- Leaves unreported hardware capabilities visibly unreported.
+- Provides an offline session rehearsal for the states `disconnected`,
+  `connected and inactive`, `configured`, `active`, and `interlocked`.
+- Models acknowledgements, a heartbeat timeout, protection interruption, explicit
+  reconnect, and configuration clearing.
+- Never represents a simulated session as a real USB connection.
 
-- Value proposition: guided troubleshooting/history. Manuscript: excludes troubleshooting instructions, corrective recommendations, and troubleshooting logs. Current implementation follows the restrictive manuscript/handoff scope.
-- Manuscript: desktop application. Software handoff: onboard Pi/browser application. Current architecture follows the handoff; manuscript wording may need researcher revision.
-- Manuscript scope describes hardware-backed Virtual IC functionality, while its delimitation says it will not physically replace ICs or automatically modify hardware configurations. Clarify the intended physical dock scope before final hardware implementation. Do not silently rewrite the manuscript.
+## Interface design
 
-## 3. Implemented software inventory
+The active interface is based on the approved TRACE Figma direction and uses a
+clean desktop layout with a fixed header, workspace navigation, and four focused
+views.
 
-| Area | Current implementation | Important boundary |
-| --- | --- | --- |
-| Home | Experiment tiles, Free Build, connection/mode chips, local QR and configured URL/SSID | QR/SSID do not create a hotspot or prove one exists |
-| Experiment | Active truth-table row, expected/observed outputs, voltages, MATCH/DIFF, observation, reset | Only two demonstration experiments, not the verified RTU manual |
-| Breadboard | Example mapped-contact view, channel readings, selected slow timelines, threshold controls | 32 example contacts; routing is not final |
-| Analyzer | Canvas waveforms, Single/Run/Stop, trigger selection, pretrigger, channel selection, zoom/pan, timebase auto-selection, cursors, bus value, expected overlay, mismatch windows, JSON/VCD exports | Generated digital captures; no real acquisition yet |
-| Virtual IC | Library, DIP pinout, load/release, simulated input toggles, sensed-power display and simulated power fault | Python models only; nothing drives a physical dock |
-| Diagnostics | Server-configured PIN, reference-meter comparison, absolute/percentage error, pass rate, CSV export | Records use simulated measurements in simulator mode; no automated physical timing/IC test bench |
-| Backend | FastAPI, WebSocket snapshots, validation, settings, shared board state | Prototype command lifecycle needs hardware hardening |
-| Device interface | NDJSON protocol, simulator, reconnecting pyserial transport | Serial selection does not create or flash firmware |
-| Deployment | Windows launcher/setup, Pi service/kiosk/hotspot scripts, nginx example | Pi scripts are prepared, not tested on the final hardware |
+- Primary blue is `#2A66C0`.
+- Soft sage is `#D8E9D3`.
+- Blue-gray is `#CACDE2`.
+- Terracotta is `#CE6B4B` and identifies disconnected hardware states.
+- The TRACE wordmark uses the bundled Iceland font.
+- Interface text uses the bundled IBM Plex Sans font.
+- The header includes a sun/moon theme control.
+- The selected light or dark theme is stored locally and restored on later
+  launches.
+- Both fonts and all interface assets are local, so the application remains
+  usable offline.
 
-IC models: **7400, 7404, 7408, 7432, 74138, 7483, 7474**. Counter IC models are not implemented. The 7474 model includes rising-edge handling and asynchronous preset/clear; it is not a metastability or setup/hold timing model.
+## Technology stack
 
-Samples: **EXP1, two-input AND gate**, and **EXP4, 2-to-4 decoder**. Do not invent the missing official experiment list. Expected waveforms are demonstration fixtures: the default decoder reference uses a 20 ms capture, 1 MHz sampling, 2000 pretrigger samples, rising A trigger, and 1 kHz input-counter steps. Different capture timing can legitimately differ from that fixed fixture.
+- Python and FastAPI provide the local application service.
+- Native HTML, CSS, and JavaScript provide the interface.
+- PyWebView with the Edge WebView2 runtime provides the desktop window.
+- The current concept state machine is implemented in `backend/concept.py`.
+- No Node.js build, npm installation, cloud account, analytics service, CDN, or
+  external runtime API is required.
 
-## 4. Repository map and actual stack
-
-The final implementation uses **buildless HTML/CSS/native JavaScript**, not the React/TypeScript stack initially proposed during planning. There is no npm build requirement.
+## Important files
 
 ```text
-T.R.A.C.E/
-  backend/
-    app.py                  FastAPI routes, runtime state, device ingestion, WebSocket
-    logic.py                Classification, experiment validation/comparison, capture logic
-    protocol.py             NDJSON framing, protocol version and line-size bound
-    transport.py            Reconnecting serial adapter
-  simulator/
-    device.py               Generated frames/captures, faults, IC models and commands
-  frontend/
-    index.html              Application shell
-    style.css               Dark-green/teal responsive UI
-    app.js                  Screens, API/WebSocket client, canvas rendering
-  data/
-    channels.json           Editable channel IDs; physical routing fields currently null
-    experiments/            Two sample JSON definitions
-    ics/library.json        Pin names/directions, power pins and gate definitions
-  tests/
-    test_logic.py           Pure logic/model tests
-    test_api.py             Simulator/API integration tests
-  tools/browser_check.py    Optional Edge/Playwright acceptance checks
-  protocol/README.md        Firmware message contract
-  deploy/                  Pi installer, hotspot script, kiosk/service docs, nginx example
-  docs/
-    HARDWARE_VALIDATION.md  Bench integration/validation outline and datasheet links
-    VALIDATION.md           Recorded software verification
-  README.md                 Setup, use, scope and limitations
-  TRACE.pyw                 Console-free Windows browser/server launcher
-  setup.ps1                 Windows dependency setup and foreground launch
-  run.py                    Uvicorn entry point
-  requirements.txt          Runtime Python dependencies
-  requirements-dev.txt      Test dependencies
-  runtime/                  Local generated settings/logs/screenshots; ignored by Git
+TRACE.pyw                       Double-click Windows launcher
+desktop.py                      Desktop window and application-owned local server
+run.py                          Browser-development server entry point
+setup.ps1                       Windows environment and dependency setup
+requirements.txt                Runtime Python dependencies
+requirements-dev.txt            Test and development dependencies
+
+backend/app.py                  FastAPI application and routes
+backend/concept.py              Current mockup state and offline session simulator
+frontend/concept.html           Current application shell
+frontend/concept.css            Base responsive interface styles
+frontend/desktop-theme.css      Figma-aligned desktop theme and dark mode
+frontend/concept.js             Current four-view interface behavior
+frontend/theme.js               Persistent light/dark theme control
+frontend/Iceland-Regular.ttf    Offline TRACE wordmark font
+frontend/IBM-Plex-Sans.ttf      Offline interface font
+
+data/concept_experiments.json   E1-E15 reference metadata
+tests/test_concept.py           Concept behavior and state-machine tests
+tools/concept_browser_check.py  Current interface acceptance checks
+protocol/README.md              Planned device/firmware communication boundary
+docs/CONCEPT_UPDATE_2026-11-12.md
+                                Detailed document-to-implementation alignment
 ```
 
-Runtime dependencies include FastAPI, Uvicorn, pyserial, qrcode and websockets. Tests use pytest/httpx; optional browser checks use Playwright and installed Microsoft Edge. A `.venv` was created with Python 3.14 on this machine. Recreate it on another machine; do not treat a copied Windows virtual environment as portable.
+The previous simulator interface remains available internally at `/legacy`. Its
+waveform analyzer, older experiment fixtures, package-style Virtual IC view, and
+Pi/hotspot assumptions belong to an earlier prototype. They are not current TRACE
+hardware specifications and are not linked from the student-facing mockup.
 
-## 5. Run, configure and verify
+## Installation and startup
 
-From the workspace on this machine:
+Python 3.11 or newer is recommended.
 
-```powershell
-.\.venv\Scripts\python.exe run.py
-```
+On a new Windows computer, double-click `TRACE.pyw`. If `.venv` is missing, the
+launcher offers to run the setup process. The first installation requires internet
+access to download Python packages. Later launches are local and offline.
 
-Open `http://127.0.0.1:8000`. Alternatively, double-click `TRACE.pyw`. The launcher uses the workspace virtual environment, reuses a responding local server, and opens a browser without a console. The launcher currently assumes port 8000.
-
-Fresh Windows setup (dependency installation needs internet):
+Setup can also be started manually from PowerShell:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
 ```
 
-Do not assume a server left running by the previous session is still alive. Check `/api/bootstrap`; avoid starting duplicate processes on the same port. The visible-browser tool was unavailable during the build, but headless Edge testing worked.
-
-| Environment variable | Purpose / default |
-| --- | --- |
-| `TRACE_DEVICE` | `simulator` by default; `serial` selects the hardware transport |
-| `TRACE_SERIAL_PORT` | Serial port; defaults to `/dev/ttyACM0`, use a confirmed `COM` port on Windows |
-| `TRACE_HOST` | Bind address; `127.0.0.1` by default |
-| `TRACE_PORT` | HTTP port; `8000` by default |
-| `TRACE_PUBLIC_URL` | QR/display URL; application default `http://trace.local` |
-| `TRACE_WIFI_NAME` | Displayed SSID; `TRACE-07` by default |
-| `TRACE_RESEARCH_PIN` | Enables researcher diagnostics; disabled when unset |
-
-The research PIN is a local lab gate, not hardened public-server authentication. Do not publish the board server to the public Internet as part of normal deployment.
+Start the desktop application manually with:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-.\.venv\Scripts\python.exe -m pytest -q
-node --check frontend/app.js
+.\.venv\Scripts\python.exe desktop.py
 ```
 
-With a local server running and Microsoft Edge installed:
+For browser-based development, run:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install playwright
-.\.venv\Scripts\python.exe tools/browser_check.py
-```
-
-Browser tests change shared simulator state. Restore normal conditions afterward if leaving a demo for the user.
-
-### Recorded validation, not a fresh test claim
-
-The build session recorded **41 passing backend tests** and **15 screen/viewport checks** (five screens at 1280 x 800, 800 x 480, and 390 x 844), plus simulator fault controls, dock loading, timebase selection and 16-channel capture checks. No JavaScript exceptions or external browser requests were detected during those checks. Representative screenshots were visually inspected.
-
-See `docs/VALIDATION.md`, `runtime/browser-results.json` and `runtime/screenshots/`. These were reviewed while preparing this handoff; tests were **not rerun just to write this document**. Rerun appropriate checks after code changes. Physical display, electrical behavior and Pi deployment remain unverified.
-
-### State and persistence
-
-- Settings persist in `runtime/settings.json`.
-- Truth-table observations, current capture and calibration rows are in memory. Export before restart.
-- All connected browsers share one board's state; controls are not isolated per student.
-- `FLOATING` means an intermediate measured voltage, not proven high impedance.
-- Missing/stale readings are UNKNOWN; a frame older than three seconds makes the live board view unlinked.
-- Sequential comparison currently counts observed LOW-to-HIGH transitions in published frames. It cannot reliably count fast clocks from a slow UI stream.
-
-## 6. How the software and hardware will connect
-
-The key integration boundary is the **device protocol**, not the frontend. Keep the interface and comparison engine; replace generated measurements with messages from actual firmware.
-
-```text
-Physical experiment switches / outputs / mapped breadboard contacts
-    |
-    +-- Slow voltage path: mux + ADC + firmware
-    |       -> frame {channel ID, millivolts}
-    |
-    +-- Fast digital path: selection matrix + protected digital inputs
-            -> MCU capture engine / trigger / buffer
-            -> cap_data chunks + cap_done
-
-MCU(s) <-- USB CDC or UART, NDJSON --> Pi Python backend
-                                       |
-                                       +-- comparison and capture processing
-                                       +-- WebSocket --> onboard browser / phone
-                                       +-- commands --> MCU(s)
-
-Virtual IC path:
-Browser selection -> backend command -> MCU logic engine
-    -> controlled direction/enable translators -> dock signal pins
-    <- input pin states and passive power-sense readings
-```
-
-**MCU responsibilities:** time-critical acquisition, sampling, trigger/pretrigger buffering, logical IC execution, pin direction, power supervision, and safe output release.
-
-**Pi responsibilities:** configuration, serial communications, comparison/presentation, serving the UI, exports, and researcher measurements. Do not implement MHz acquisition or timing-critical dock behavior in Python or browser callbacks.
-
-**Frontend responsibilities:** display actual status/limits and send requests. A button click is not proof that the hardware completed an action.
-
-### Physical channel mapping
-
-`data/channels.json` currently has logical IDs and example channels, with `mux` and `capture_input` set to null. Preserve IDs where practical, but replace example routing with a reviewed schematic-derived map. Record ADC inputs, mux banks/select lines, physical test points, capture inputs, and board revision.
-
-The current JSON routing fields do **not** automatically program a mux or upload a map to firmware. Implement a deliberate mapping workflow: generate firmware configuration from the reviewed map, or define a validated mapping-upload command. Add a map/version identity to the handshake and reject incompatible combinations.
-
-### Device selection
-
-Once working firmware and mapping exist, set:
-
-```powershell
-$env:TRACE_DEVICE = 'serial'
-$env:TRACE_SERIAL_PORT = 'COM5' # example only: identify the actual board port
 .\.venv\Scripts\python.exe run.py
 ```
 
-On Pi, configure the actual serial device in `/etc/trace.env`. Serial mode must visibly show no link when hardware is absent; do not silently substitute simulator data.
+Then open `http://127.0.0.1:8000`. The browser route is intended for development.
+The PyWebView window is the normal mockup entry point.
 
-The current runtime supports **one serial device**. If the final design uses separate capture and dock MCUs, add a device manager/routing layer or an agreed hardware bridge. A second MCU is not supported merely by connecting another USB cable.
+## Demonstration flow
 
-## 7. Firmware contract and integration gaps
+1. Open **Experiments**, select E4, and identify its physical region and A, B,
+   and C switch labels.
+2. Explain that the inputs are operated on the physical trainer and the software
+   locator is a reference.
+3. Open **Breadboard monitor** and enable offline example values. Identify the
+   supported node groups and the LOW, HIGH, UNDEFINED, and UNAVAILABLE states.
+4. Open **Connection** and start an example session.
+5. Open **Virtual IC**, choose the supported 74LS00 rehearsal, review the logical
+   map, and request configuration.
+6. Complete the visible wiring confirmation and activate the example.
+7. Toggle simulated input signals and observe the calculated NAND output state.
+8. Deactivate the example and disconnect the example session.
 
-Read `protocol/README.md` before writing firmware. Important current rules:
+During a presentation, describe the application as an **interactive offline
+software mockup backed by simulated trainer data**. The four screens demonstrate
+the intended workflow and do not establish physical prototype performance.
 
-- Version 1, UTF-8 newline-delimited JSON, bounded lines. Serial default is 115200 baud.
-- Device `hello` reports protocol, channel/rate/depth capabilities and supported ICs.
-- Backend sends `cfg`, `watch`, `cap_cfg`, `cap_arm`, `cap_stop`, `vic_load`, `vic_release`.
-- Device publishes `frame`, `cap_data`, `cap_done`, `cap_stopped`, `vic_status`, `ack`, `err`.
-- Slow frames are complete snapshots of requested channels, not partial updates.
-- Capture event deltas are **samples**; `dt` is **nanoseconds per sample**. Bit order follows the configured channel list.
-- Capture IDs distinguish acquisitions; chunk sequence numbers must be contiguous. Only the first event of the entire capture has delta zero.
-- The backend currently requires reported `dt` to match the requested rate within its validation tolerance. If hardware supports discrete/rounded rates, add negotiated actual-rate handling rather than misreporting timing.
-- Overflow/dropped samples are visible and must never be hidden.
-- `sim_set`, `vic_pin` and `vic_power` are simulator controls, not physical output commands.
+## Verification
 
-Hardware limits must be established with the real ADC, mux, buffers, MCU and transport. The simulator's 16 channels, 10 MS/s, 200000 samples, nominal 1 kHz scan and 1 kHz IC target are **not measured performance**. The simulator generates frames around 10 Hz; it does not physically scan at 1 kHz.
+Run the Python test suite with:
 
-The following are **future hardening tasks**, not implemented guarantees:
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
 
-1. Correlate command acknowledgements with pending requests; implement deadlines, error recovery, configuration acceptance and busy-state handling. Current code assigns IDs and stores the last ack, but has no full command transaction manager.
-2. Add an explicit host heartbeat/watchdog protocol and firmware output-release behavior. The current documentation calls for this; no heartbeat sender or physical watchdog implementation exists here.
-3. Associate stop/status messages with acquisition IDs so a delayed stop response cannot invalidate a newly armed capture.
-4. Decide how frame freshness behaves during long captures/transfers. Avoid falsely marking a healthy board disconnected merely because acquisition pauses voltage publications.
-5. Add serial/hardware-in-the-loop tests for truncated lines, split reads, disconnect/reconnect, reset, chunk loss, delayed acknowledgements and unplugged dock behavior. Current integration tests use the simulator, not a physical serial link.
-6. Drive UI limits, IC speed labels and selectable rates from real negotiated capabilities. Some current presentation/configuration values remain simulator-oriented; audit them before hardware demonstrations.
-7. Add capture rendering decimation or visible-range processing if worst-case dense captures are slow. Tested 16-channel generated captures do not prove smooth rendering for every 200000-event buffer.
+Run the JavaScript syntax checks with:
 
-## 8. Practical integration roadmap
+```powershell
+node --check frontend/concept.js
+node --check frontend/theme.js
+```
 
-### Stage A: freeze the minimum hardware and experiment contract
+With the development server running and Playwright installed, run the interface
+checks with:
 
-Obtain Pi model, screen module/interface, MCU choice, ADC/mux parts, capture matrix, buffer/translator design, dock power sensing and actual schematic/pin map. Obtain the lab manual and selected experiment truth tables/sequential behavior.
+```powershell
+.\.venv\Scripts\python.exe tools/concept_browser_check.py
+```
 
-Agree whether one or two MCUs are used and resolve the physical Virtual IC scope. Review exact IC variants and pinouts; for example, the included 7483 model uses the 83A-style DIP arrangement, not the 74283 arrangement. Consult manufacturer documentation for the actual purchased parts before wiring.
+The latest local test run completed with **73 passing Python tests**. These tests
+verify software behavior and simulated state transitions. They do not validate
+physical hardware.
 
-**Exit condition:** reviewed board revision, mapping, power/interface design, and an agreed first experiment. Do not guess routing from UI illustrations.
+## Scope boundaries
 
-### Stage B: first real measurement, one channel at a time
+- Only mapped or selected breadboard groups may be described as monitored.
+- The breadboard voltage display is not an analog oscilloscope.
+- `UNDEFINED` means the voltage lies between the selected LOW and HIGH
+  thresholds. It is not an automatic diagnosis of a wiring fault.
+- Missing, invalid, or stale readings must appear unavailable rather than as zero
+  volts or a current logic state.
+- Simulator values and timing limits must not be reported as measured hardware
+  capabilities.
+- Virtual IC behavior is logic-level emulation. It does not establish physical
+  propagation delay, drive current, loading, or unrestricted replacement of ICs.
+- The application should not provide automatic troubleshooting diagnoses,
+  corrective recommendations, or student troubleshooting logs.
+- No student accounts or personal data are required by the current design.
 
-Implement minimal MCU firmware: protocol handshake, accepted configuration, one protected ADC input and one `frame` channel. Confirm readings against a reference meter. Switch the backend to serial mode and watch the same reading appear in the browser.
+## Physical hardware integration plan
 
-Then add mux scanning, settling time, ADC calibration/scale conversion and remaining mapped channels. Separate hardware scan frequency from publication frequency so serial bandwidth is respected.
+The intended integration boundary is a USB connection between the desktop service
+and the trainer MCU. The current offline session service must be replaced or
+extended with a real device service that provides:
 
-**Exit condition:** a real known voltage on a named contact appears correctly, missing data becomes UNKNOWN, and reconnect does not leave stale values displayed.
+- Device, firmware, protocol, and board-revision identity
+- Supported sensing nodes and Virtual IC models
+- Electrical and timing limits established through physical validation
+- Voltage samples with channel identity, validity, sequence, and freshness
+- Versioned logical signal maps and resource ownership
+- Correlated configure, activate, deactivate, status, and error acknowledgements
+- Hardware output-enable and output-disable confirmation
+- Heartbeat handling, autonomous firmware watchdog behavior, and explicit restart
+- Actual input and output state reports for an active Virtual IC configuration
 
-### Stage C: integrate one complete physical experiment
+The MCU should perform time-sensitive acquisition, logical IC execution, pin
+direction control, and safe output release. The Python service should manage USB
+communication, configuration, state presentation, and application requests.
 
-Map actual switches and outputs to a JSON experiment. Exercise every truth-table row with the real circuit; verify live row selection, outputs, voltages and reset. Test intermediate voltages and disconnected/omitted readings without claiming automatic fault diagnosis.
+Recommended implementation sequence:
 
-Expand to the official experiment library only after the first end-to-end path works. For sequential activities, define reset/synchronization and expected state progression; move fast-edge comparisons into captured data rather than slow snapshots.
+1. Finalize the MCU, sensing, buffering, power, protection, and USB design.
+2. Establish a minimal versioned device handshake.
+3. Send one verified physical voltage sample from a named node to the current UI.
+4. Expand to the reviewed breadboard node map and validate readings against a
+   reference instrument.
+5. Integrate one complete physical experiment before populating all E1-E15 data.
+6. Implement a simple combinational Virtual IC such as 74LS00 with safe output
+   defaults and verified disable behavior.
+7. Finalize the exact 7476 variant and validate both sections, clock behavior, and
+   asynchronous controls before enabling it.
+8. Publish only measured and reproducible hardware capabilities.
 
-**Exit condition:** a real experiment's expected-versus-measured results agree with independent observations for every supported test condition.
-
-### Stage D: add digital capture conservatively
-
-Start with a small number of protected channels and a modest verified sample rate. Implement MCU-local trigger detection, ring/pretrigger buffering, acquisition completion, change-event encoding and bounded chunk transfer. Extend channel count/rate/depth only as measured resources permit.
-
-USB CDC/UART NDJSON is a control/transfer interface, not an assumed raw MHz streaming path. Transfer captures after acquisition; consider binary transfer later if measurements justify it. Report actual timing, overflow and transport loss honestly.
-
-Compare with a reference analyzer/oscilloscope, then validate expected-waveform alignment, trigger placement, cursor timing and VCD exports.
-
-**Exit condition:** independently verified captures and published measured capability limits, including failure behavior.
-
-### Stage E: physical Virtual IC integration
-
-Only proceed after the electrical interface and thesis scope are approved. Begin with one simple combinational IC, such as the 7400. Use the reviewed input/output directions, controlled translators, passive VCC/GND sense and output-enable supervision.
-
-Implement safe startup/release and firmware-local power/watchdog checks before allowing outputs. Verify logic behavior against a real chip, then measure propagation and reliable rates under the intended load. Add remaining combinational ICs, then 7474 and selected counters if in scope.
-
-**Exit condition:** verified truth tables, measured timing/load limits and proven release on power faults, reset and lost communication. Software simulation tests cannot establish these properties.
-
-### Stage F: deploy on the Pi and physical touchscreen
-
-Use `deploy/install-pi.sh` as a starting point; verify OS packages, service permissions, serial access, display rotation and touch input on the actual Pi. Configure kiosk desktop auto-login separately.
-
-Run hotspot configuration locally because it changes the active Wi-Fi connection. The supplied initial Pi service uses `http://trace.local:8000`; the handoff's portless `http://trace.local` requires the supplied nginx configuration to be installed and the public URL updated. Check QR, hostname, SSID and actual reachable address together.
-
-Test with internet unavailable, a phone and the touchscreen connected simultaneously, MCU unplug/replug, reboot and power cycling. Network/display scripts are not proven by Windows tests.
-
-**Exit condition:** the board boots into a usable offline app and phones can reach the same board state without accounts or installs.
-
-### Stage G: thesis technical validation
-
-Use `docs/HARDWARE_VALIDATION.md` to organize reference-voltage, timing, IC and operational tests. Agree tolerances and procedures with the researchers before evaluating results. Add timing-comparison and real-chip test tooling as needed; current diagnostics only calculate voltage-reference comparisons.
-
-Record board/firmware/software revisions, instrument identity/calibration, conditions and limitations alongside exports. Separate simulator records from physical records. Publish pass rates using valid tests and do not invent measurement results or learning-outcome claims.
-
-**Exit condition:** reproducible physical evidence supports each reported capability and limitation.
-
-## 9. Recommended next-agent behavior
-
-1. Read this file, then `README.md`, `protocol/README.md`, `docs/VALIDATION.md` and the current source. Confirm what changed since this snapshot.
-2. Preserve the working simulator as a regression/development option and the existing UI reference direction.
-3. Ask for the missing hardware/material decisions only when they block the requested integration step. There is no selected, wired MCU hidden elsewhere in this handoff.
-4. Prefer the smallest real end-to-end milestone: **one physical input -> MCU frame -> serial adapter -> backend -> browser**. Prove it before adding all channels and the dock.
-5. Keep measured hardware capabilities separate from aspirational targets and synthetic limits.
-6. Run relevant tests after changes and document what was actually verified. Do not call physical integration complete because simulator or browser checks passed.
-
-Suggested opening prompt for a new agent:
-
-> Read TRACE_AGENT_HANDOFF.md in this workspace and inspect the existing code before changing it. This is currently a simulator-backed TRACE thesis application, not a verified hardware system. Preserve the current functionality and scope constraints. Help me continue from this baseline toward the specific software or hardware milestone I describe next, and distinguish implemented behavior, proposed work, and physical validation throughout.
+Physical integration is complete only after bench validation confirms the USB
+session, measurement accuracy, logical behavior, timing, reset, watchdog,
+disconnect, and output-release behavior on the actual trainer.
